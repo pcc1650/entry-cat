@@ -2,8 +2,10 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 
-
-export default class App extends React.Component{
+@connect(state=>({
+    userInfo: state.loginRequest.userInfo
+}))
+ class App extends React.Component{
     componentWillMount(){
         console.log('App')
     }
@@ -15,10 +17,14 @@ export default class App extends React.Component{
         // else{
         //     browserHistory.push('login')
         // }
-        browserHistory.push('login')
+        browserHistory.push('/login')
     }
     render(){
-        return(
+        console.log(this.props.location.pathname)
+        if (this.props.location.pathname == '/login' )
+            return this.props.children
+
+        return  this.props.userInfo == null ? null : (
             <div>
                 {this.props.children}
             </div>
@@ -26,6 +32,7 @@ export default class App extends React.Component{
     }
 }
 
+export default App
 
 // const mapStateToProps = state => {
 //     const { loginRequest } = state

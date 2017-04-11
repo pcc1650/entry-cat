@@ -37,7 +37,7 @@ class Login extends React.Component{
     componentWillReceiveProps(nextProps) {
         const { isLogined } = nextProps
         if(isLogined){
-            browserHistory.push('/index')
+            browserHistory.push('/')
         }
     }
     handleLogin(e){

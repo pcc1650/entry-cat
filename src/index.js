@@ -9,6 +9,7 @@ import reducer from './reducers'
 import App from './containers/App'
 import Login from './components/Login'
 import Index from './components/Index'
+import EventPage from './components/EventPage'
 
 const middleware = [ thunk, createLogger() ]
 
@@ -22,9 +23,9 @@ render((
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path='/' component={App}>
-                <IndexRoute component={App} />
+                <IndexRoute component={Index} />
                 <Route path='login' component={Login} />
-                <Route path='index' component={Index} />
+                <Route path='event/:id' component={EventPage} />
             </Route>
         </Router>
     </Provider>

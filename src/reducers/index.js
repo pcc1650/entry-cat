@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux'
-import { LOGINING_REQUEST, LOGIN_REQUEST_SUCC, LOGIN_REQUEST_FAIL, REQUEST_POSTS, RECEIVE_POSTS, SWITCH_SEARCH_BAR, REQUEST_CHANNELS, RECEIVE_CHANNELS, SELECT_CHANNEL, REMOVE_CHANNEL} from '../actions'
+import * as Actions from '../actions'
 
 const loginRequest = (state = {isLogining: false, isLogined: false, loginFailed: false}, action) => {
     switch (action.type) {
-        case LOGINING_REQUEST:
+        case Actions.LOGINING_REQUEST:
             return {
                 ...state,
                 isLogining: true,
                 // username: action.username,
                 // password: action.password,
             }
-        case LOGIN_REQUEST_SUCC:
+        case Actions.LOGIN_REQUEST_SUCC:
             return {
                 ...state,
                 isLogining: false,
@@ -19,7 +19,7 @@ const loginRequest = (state = {isLogining: false, isLogined: false, loginFailed:
                 isLogined: true,
                 loginFailed: false,
             }
-        case LOGIN_REQUEST_FAIL:
+        case Actions.LOGIN_REQUEST_FAIL:
             return {
                 ...state,
                 isLogining: false,
@@ -32,17 +32,17 @@ const loginRequest = (state = {isLogining: false, isLogined: false, loginFailed:
 
 const fetchPosts = (state = {isFetchingPosts: false, posts: []}, action) => {
     switch(action.type) {
-        case REQUEST_POSTS:
+        case Actions.REQUEST_POSTS:
             return {
                 ...state,
-                isFetchingPosts: true
+                isFetchingPosts: true,
             }
-        case RECEIVE_POSTS:
+        case Actions.RECEIVE_POSTS:
             return {
                 ...state,
                 isFetchingPosts: false,
                 posts: action.posts,
-                hasMore: action.hasMore,
+                hasMore: action.hasMorePosts,
             }
         default:
             return state
@@ -51,12 +51,12 @@ const fetchPosts = (state = {isFetchingPosts: false, posts: []}, action) => {
 
 const fetchChannels = (state = {isFetchingChannels: false, channels: []}, action) => {
     switch(action.type) {
-        case REQUEST_CHANNELS:
+        case Actions.REQUEST_CHANNELS:
             return {
                 ...state,
                 isFetchingChannels: true
             }
-        case RECEIVE_CHANNELS:
+        case Actions.RECEIVE_CHANNELS:
             return {
                 ...state,
                 isFetchingChannels: false,
@@ -69,7 +69,7 @@ const fetchChannels = (state = {isFetchingChannels: false, channels: []}, action
 
 const switchSearchBar = (state = {searchBar: false}, action) => {
     switch(action.type){
-        case SWITCH_SEARCH_BAR:
+        case Actions.SWITCH_SEARCH_BAR:
             return {
                 ...state,
                 searchBar: !state.searchBar,
@@ -81,21 +81,139 @@ const switchSearchBar = (state = {searchBar: false}, action) => {
 
 const selectChannel = (state = {selectedChannel: []}, action) => {
     switch(action.type){
-        case SELECT_CHANNEL:
+        case Actions.SELECT_CHANNEL:
+            let newSeletedChannel = state.selectedChannel.slice()
+            newSeletedChannel.push(action.channelId)
             return {
                 ...state,
-                selectedChannel: selectedChannel.push(action.channelId)
+                selectedChannel: newSeletedChannel
             }
-        case REMOVE_CHANNEL:
+        case Actions.REMOVE_CHANNEL:
             return {
                 ...state,
-                selectedChannel: selectedChannel.filter(v => v != channelId)
+                selectedChannel: (state.selectedChannel.filter(v => v != action.channelId))
             }
         default:
             return state
     }
 }
 
+const fetchComments = (state = {isFetchingComments: false, comments: []}, action) => {
+    switch(action.type) {
+        case Actions.REQUEST_COMMENTS:
+            return {
+                ...state,
+                isFetchingComments: true
+            }
+        case Actions.RECEIVE_COMMENTS:
+            return {
+                ...state,
+                isFetchingComments: false,
+                comments: action.comments,
+                hasMoreComments: action.hasMoreComments,
+            }
+        default:
+            return state
+    }
+}
+
+const postCommentRequest = (state = { isPostingComment: false, isPosted: false}, action) =>{
+    switch(action.type){
+        case Actions.POSTING_COMMENT:
+            return {
+                ...state,
+                isPostingComment: true,
+            }
+        case Actions.POST_COMMENT_SUCC:
+            return {
+                ...state,
+                isPostingComment: false,
+                isPosted: true,
+            }
+        case Actions.POST_COMMENT_FAIL:
+            return {
+                ...state,
+                isPostingComment: false
+            }
+        case Actions.CHANGE_ISPOSTED_FALSE:
+            return {
+                ...state,
+                isPosted: false,
+            }
+        default:
+            return state
+    }
+}
+
+const toggleCommentInput = (state = {commentInput: false, replyTo: ''}, action) => {
+    switch(action.type){
+        case Actions.ENABLE_COMMENT_INPUT:
+            return {
+                ...state,
+                commentInput: true,
+                replyTo: ''
+            }
+        case Actions.DISABLE_COMMENT_INPUT:
+            return {
+                ...state,
+                commentInput: false,
+            }
+        case Actions.REPLY_COMMENT:
+            return {
+                ...state,
+                commentInput: true,
+                replyTo: action.replyTo
+            }
+        default:
+            return state
+    }
+}
+
+const toggleEventLike = (state = {isSendingLike: false, sentLike: false}, action) => {
+    switch(action.type){
+        case Actions.SENDING_LIKE:
+            return {
+                ...state,
+                isSendingLike: true,
+            }
+        case Actions.SEND_LIKE_SUCC:
+            return {
+                ...state,
+                isSendingLike: false,
+                sentLike: true,
+            }
+        case Actions.SEND_LIKE_FAIL:
+            return {
+                ...state,
+                isSendingLike: false,
+            }
+        case Actions.CHANGE_SENTLIKE_FALSE:
+            return {
+                ...state,
+                senLike: false,
+            }
+        default:
+            return state
+    }
+}
+
+const fetchLikedUsers = (state = {isFetchingLikedUsers: false, likedUsers: []}, action) => {
+    switch(action.type){
+        case Actions.REQUESTING_LIKED_USERS:
+            return {
+                ...state,
+                isFetchingLikedUsers: true,
+            }
+        case Actions.RECEIVE_LIKED_USERS:
+            return {
+                ...state,
+                isFetchingLikedUsers: false,
+                likedUsers: action.users,
+            }
+        default:
+            return state
+    }
+}
 
 const rootReducer = combineReducers ({
     loginRequest,
@@ -103,6 +221,11 @@ const rootReducer = combineReducers ({
     switchSearchBar,
     fetchChannels,
     selectChannel,
+    fetchComments,
+    postCommentRequest,
+    toggleCommentInput,
+    toggleEventLike,
+    fetchLikedUsers,
 })
 
 export default rootReducer

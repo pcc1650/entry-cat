@@ -10,7 +10,9 @@ module.exports = {
     },
     devServer: {
         contentBase: __dirname + '/src',
+	historyApiFallback: true,
     },
+    devtool: 'source-map',
     module: {
         rules: [
             {

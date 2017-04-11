@@ -15,9 +15,10 @@ export default class Channels extends React.Component {
             <div>
                 <h2> CHANNEL </h2>
                 <div>
+                    <Channel key='all' name='ALL' id='all'/>
                     {
                         channels.map((channel) => {
-                            return <Channel key={channel['id']} name={channel['name']} />
+                            return <Channel key={channel['id']} name={channel['name']} id={channel['id']}/>
                         })
                     }
                 </div>

@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { requestPosts, switchingSearchBar, requestChannels, selectChannel } from '../actions'
+import { requestPosts, switchingSearchBar, requestChannels, selectingChannel, removingChannel } from '../actions'
 import PostThumbnail from './PostThumbnail'
 import SearchBar from './SearchBar'
+import{ browserHistory } from 'react-router'
 
 class Index extends React.Component {
     componentWillMount(){
@@ -15,11 +16,16 @@ class Index extends React.Component {
         const { dispatch } = this.props
         dispatch(switchingSearchBar())
     }
+    handleClickEvent(id){
+        const { posts } = this.props
+        browserHistory.push('/event/' + id)
+    }
+
+
+
     render() {
         const { userInfo, isFetchingPosts, posts, searchBar, channels, selectedChannel } = this.props
         const username = userInfo.username
-        console.log('***')
-        console.log(selectedChannel)
         return (
             <div>
                 <h1>Hello {username} !</h1>
@@ -35,7 +41,8 @@ class Index extends React.Component {
                 <div>
                     {
                         posts.map((post) => {
-                            return <PostThumbnail key={post['id']} username={post['creator']['username']} channel={post['channel']['name']} title={post['name']} startDate={post['begin_time']} endDate={post['end_time']} description={post['description']}/>
+                            return <PostThumbnail key={post['id']} username={post['creator']['username']} channel={post['channel']['name']} title={post['name']} startDate={post['begin_time']} endDate={post['end_time']} description={post['description']} id={post['id']}
+                            onClick={() => this.handleClickEvent(post['id'])}/>
                         })
                     }
                 </div>
