@@ -22,6 +22,24 @@ module.exports = {
                     loader: 'babel-loader',
                 }],
             },
+    	    {
+        		test: /\.css$/,
+        		use: ["style-loader", "css-loader", 'resolve-url-loader'],
+    	    },
+    	    {
+        		test: /\.scss$/,
+        		use: ['style-loader', 'css-loader', 'resolve-url-loader','sass-loader']
+    	    },
+            {
+                test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 30000,
+                        name: '[name]-[hash].[ext]',
+                    },
+                }],
+            },
         ]
     }
 }

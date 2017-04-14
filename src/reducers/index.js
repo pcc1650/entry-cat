@@ -215,6 +215,96 @@ const fetchLikedUsers = (state = {isFetchingLikedUsers: false, likedUsers: []}, 
     }
 }
 
+const fetchJoinedUsers = (state = {isFetchingJoinedUsers: false, joinedUsers: []}, action) => {
+    switch(action.type){
+        case Actions.REQUESTING_JOINED_USERS:
+            return {
+                ...state,
+                isFetchingJoinedUsers: true,
+            }
+        case Actions.RECEIVE_JOINED_USERS:
+            return {
+                ...state,
+                isFetchingJoinedUsers: false,
+                joinedUsers: action.users,
+            }
+        default:
+            return state
+    }
+}
+
+const fetchUser = (state = {isFetchingUser: false, user: {}}, action) => {
+    switch(action.type){
+        case Actions.REQUEST_USER:
+            return {
+                ...state,
+                isFetchingUser: true,
+            }
+        case Actions.RECEIVE_USER:
+            return {
+                ...state,
+                isFetchingUser: false,
+                user: action.user
+            }
+        default:
+            return state
+    }
+}
+
+const fetchUserLike = (state = {isFetchingUserLike:false, userLike: {}}, action) => {
+    switch(action.type){
+        case Actions.REQUEST_USER_LIKE:
+            return {
+                ...state,
+                isFetchingUserLike: true,
+            }
+        case Actions.RECEIVE_USER_LIKE:
+            return {
+                ...state,
+                isFetchingUserLike:false,
+                userLike: action.userLike,
+            }
+        default:
+            return state
+    }
+}
+
+const fetchUserGoing = (state = {isFetchingUserGoing:false, userGoing: {}}, action) => {
+    switch(action.type){
+        case Actions.REQUEST_USER_GOING:
+            return {
+                ...state,
+                isFetchingUserGoing: true,
+            }
+        case Actions.RECEIVE_USER_GOING:
+            return {
+                ...state,
+                isFetchingUserGoing:false,
+                userGoing: action.userGoing,
+            }
+        default:
+            return state
+    }
+}
+
+const fetchUserPast = (state = {isFetchingUserPast:false, userPast: {}}, action) => {
+    switch(action.type){
+        case Actions.REQUEST_USER_PAST:
+            return {
+                ...state,
+                isFetchingUserPast: true,
+            }
+        case Actions.RECEIVE_USER_PAST:
+            return {
+                ...state,
+                isFetchingUserPast:false,
+                userPast: action.userPast,
+            }
+        default:
+            return state
+    }
+}
+
 const rootReducer = combineReducers ({
     loginRequest,
     fetchPosts,
@@ -226,6 +316,11 @@ const rootReducer = combineReducers ({
     toggleCommentInput,
     toggleEventLike,
     fetchLikedUsers,
+    fetchJoinedUsers,
+    fetchUser,
+    fetchUserLike,
+    fetchUserGoing,
+    fetchUserPast,
 })
 
 export default rootReducer

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Channels from './Channels'
 import { requestPosts, requestPostsWithFilter, switchingSearchBar } from '../actions'
-
+import '../sass/searchBar.scss'
 
 class SearchBar extends React.Component {
     constructor(){
@@ -18,9 +18,9 @@ class SearchBar extends React.Component {
     }
     render(){
         return (
-            <div>
-            <Channels channels={this.props.channels}/>
-            <button onClick={(e) => this.handleClick(e)}> Search </button>
+            <div className='searchBar-container'>
+                <Channels channels={this.props.channels}/>
+                <button onClick={(e) => this.handleClick(e)}> Search </button>
             </div>
         )
     }

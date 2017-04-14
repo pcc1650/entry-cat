@@ -1,0 +1,52 @@
+@import "color.scss";
+
+
+.banner-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7vh;
+    background-color: $Primary;
+    z-index: 10;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: space-between;
+    // align-items: center;
+}
+
+.banner-search{
+    position: fixed;
+    height: 5vh;
+    width: 5vh;
+    top: 0;
+    left: 16px;
+    margin-top: 1vh;
+    background-image: url('../SVGs/search-index.svg');
+}
+
+.banner-logo{
+    position: fixed;
+    height: 5vh;
+    width: 5vh;
+    text-align: center;
+    left: 45.5vw;
+    top: 1vh;
+    background-image: url('../SVGs/logo-cat-login.svg');
+}
+
+.banner-avatar{
+    position: fixed;
+    right: 16px;
+    top: 0;
+    height: 5vh;
+    width: 5vh;
+    margin-top: 1vh;
+    // padding-top: 5px;
+    z-index: 11;
+}
+
+
+.banner-avatar-image{
+    border-radius: 50%
+}

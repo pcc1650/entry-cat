@@ -22,9 +22,24 @@ export const SEND_LIKE_SUCC = 'SEND_LIKE_SUCC'
 export const SEND_LIKE_FAIL = 'SEND_LIKE_FAIL'
 export const REQUESTING_LIKED_USERS = 'REQUESTING_LIKED_USERS'
 export const RECEIVE_LIKED_USERS = 'RECEIVE_LIKED_USERS'
-// export const CHANGE_SENTLIKE_FALSE = 'CHANGE_SENTLIKE_FALSE'
+export const SENDING_JOIN = 'SENDING_JOIN'
+export const SEND_JOIN_SUCC = 'SEND_JOIN_SUCC'
+export const SEND_JOIN_FAIL = 'SEND_JOIN_FAIL'
+export const REQUESTING_JOINED_USERS = 'REQUESTING_JOINED_USERS'
+export const RECEIVE_JOINED_USERS = 'RECEIVE_JOINED_USERS'
+export const REQUEST_USER = 'REQUEST_USER'
+export const RECEIVE_USER = 'RECEIVE_USER'
+export const REQUEST_USER_LIKE = 'REQUEST_USER_LIKE'
+export const RECEIVE_USER_LIKE = 'RECEIVE_USER_LIKE'
+export const REQUEST_USER_GOING = 'REQUEST_USER_GOING'
+export const RECEIVE_USER_GOING = 'RECEIVE_USER_GOING'
+export const REQUEST_USER_PAST = 'REQUEST_USER_PAST'
+export const RECEIVE_USER_PAST = 'RECEIVE_USER_PAST'
+// import { getIPs } from '../getIP'
+// getIPs(function(ip){console.log(ip);})
 
-
+const ipAddress = 'http://10.2.202.31:8081'
+// const ipAddress = 'http://192.168.33.10'
 
 export const loginingRequest = () => ({
     type: LOGINING_REQUEST,
@@ -133,19 +148,72 @@ export const receiveLikedUsers = (data) => ({
     users: data.users
 })
 
-// export const changeSentLikeFalse = () => ({
-//     type: CHANGE_SENTLIKE_FALSE,
-// })
+export const sendingJoin = () => ({
+    type: SENDING_JOIN,
+})
+
+export const sendJoinSucc = () => ({
+    type: SEND_JOIN_SUCC,
+})
+
+export const sendJoinFail = () => ({
+    type: SEND_JOIN_FAIL,
+})
+
+export const requestingJoinedUsers = () => ({
+    type: REQUESTING_JOINED_USERS
+})
+
+export const receiveJoinedUsers = (data) => ({
+    type: RECEIVE_JOINED_USERS,
+    users: data.users
+})
+
+export const requestingUser = () => ({
+    type: REQUEST_USER,
+})
+
+export const receiveUser = (data) => ({
+    type: RECEIVE_USER,
+    user: data,
+})
+
+export const requestingUserLike = () => ({
+    type: REQUEST_USER_LIKE,
+})
+
+export const receiveUserLike = (data) => ({
+    type: RECEIVE_USER_LIKE,
+    userLike: data
+})
+
+export const requestingUserGoing = () => ({
+    type: REQUEST_USER_GOING,
+})
+
+export const receiveUserGoing = (data) => ({
+    type: RECEIVE_USER_GOING,
+    userGoing: data
+})
+
+export const requestingUserPast = () => ({
+    type: REQUEST_USER_PAST,
+})
+
+export const receiveUserPast = (data) => ({
+    type: RECEIVE_USER_PAST,
+    userPast: data
+})
 
 export const requestPosts = (credential) => dispatch => {
     dispatch(requestingPosts())
-    return fetch('http://blackcat.dev/api/events', {headers: {'X-BLACKCAT-TOKEN': credential}})
+    return fetch(ipAddress + '/api/events', {headers: {'X-BLACKCAT-TOKEN': credential}})
         .then(response => response.ok? response.json(): false)
         .then(body => body? dispatch(receivePosts(body)): console.log('fail to fetch posts'))
 }
 
 export const requestPostsWithFilter = (credential, filterCondition) => dispatch => {
-    let url = 'http://blackcat.dev/api/events?channels=' + filterCondition.selectedChannel.toString()
+    let url = ipAddress + '/api/events?channels=' + filterCondition.selectedChannel.toString()
     dispatch(requestingPosts())
     return fetch(url, {headers: {'X-BLACKCAT-TOKEN': credential}})
         .then(response => response.ok? response.json(): false)
@@ -154,14 +222,14 @@ export const requestPostsWithFilter = (credential, filterCondition) => dispatch 
 
 export const requestChannels = (credential) => dispatch => {
     dispatch(requestingChannels())
-    return fetch('http://blackcat.dev/api/channels', {headers: {'X-BLACKCAT-TOKEN': credential}})
+    return fetch(ipAddress + '/api/channels', {headers: {'X-BLACKCAT-TOKEN': credential}})
         .then(response => response.ok? response.json(): false)
         .then(body => body? dispatch(receiveChannels(body)): console.log('fail to fetch channels'))
 }
 
 
 export const requestComments = (eventId, credential) => dispatch => {
-    let url = 'http://blackcat.dev/api/event/'+eventId+'/comments'
+    let url = ipAddress + '/api/event/'+eventId+'/comments'
     dispatch(requestingComments())
     return fetch(url, {headers: {'X-BLACKCAT-TOKEN': credential}})
     .then(response => response.ok? response.json(): false)
@@ -175,9 +243,8 @@ export const login = info => dispatch => {
     // You cannot view the data in FormData by console.log() but it actually exists.
     let form = new FormData()
     Object.entries(info).map(([k, v]) => form.append([k, v][0], [k, v][1]))
-    return fetch('http://blackcat.dev/api/auth/token', {method: 'POST', body: form})
-    // return fetch('http://blackcat.dev/api/events', {headers: {'X-BLACKCAT-TOKEN': 'NwvrPWAgXWVBVvO4tdYrUJs3MtrGAlh6'}})
-    // .then(response => response.ok? dispatch(loginRequestSucc(response.json())): dispatch(loginRequestFail()))
+    // return fetch('http://blackcat.dev/api/auth/token', {method: 'POST', body: form})
+    return fetch(ipAddress + '/api/auth/token', {method: 'POST', body: form, headers: {'Host': 'blackcat.dev'}})
     .then(response => response.ok? response.json(): false)
     .then(body => body? dispatch(loginRequestSucc(body)): dispatch(loginRequestFail()))
 }
@@ -186,7 +253,7 @@ export const postComment = (comment, eventId, credential) => dispatch => {
     dispatch(postingComment())
     let form = new FormData()
     form.append('comment', comment)
-    return fetch('http://blackcat.dev/api/event/' + eventId + '/comments', {method: 'POST', body: form, headers: {'X-BLACKCAT-TOKEN': credential}})
+    return fetch(ipAddress + '/api/event/' + eventId + '/comments', {method: 'POST', body: form, headers: {'X-BLACKCAT-TOKEN': credential}})
     .then(response => response.ok? dispatch(postCommentSucc()): dispatch(postCommentFail()))
     .then(setTimeout(()=>{
         dispatch(changeIsPostedFalse())
@@ -195,19 +262,70 @@ export const postComment = (comment, eventId, credential) => dispatch => {
 
 export const sendLike = (eventId, credential) => dispatch => {
     dispatch(sendingLike())
-    return fetch('http://blackcat.dev/api/event/' + eventId + '/likes', {method: 'POST', headers: {'X-BLACKCAT-TOKEN': credential}})
+    return fetch(ipAddress + '/api/event/' + eventId + '/likes', {method: 'POST', headers: {'X-BLACKCAT-TOKEN': credential}})
     .then(response => response.ok? dispatch(sendLikeSucc()): dispatch(sendLikeFail()))
 }
 
 export const cancelLike = (eventId, credential, userId) => dispatch => {
     dispatch(sendingLike())
-    return fetch('http://blackcat.dev/api/event/' + eventId + '/likes/' + userId, {method: 'DELETE', headers: {'X-BLACKCAT-TOKEN': credential}})
+    return fetch(ipAddress+ '/api/event/' + eventId + '/likes/' + userId, {method: 'DELETE', headers: {'X-BLACKCAT-TOKEN': credential}})
     .then(response => response.ok? dispatch(sendLikeSucc()): dispatch(sendLikeFail()))
 }
 
 export const requestLikedUsers = (eventId, credential) => dispatch => {
     dispatch(requestingLikedUsers())
-    return fetch('http://blackcat.dev/api/event/' + eventId + '/likes', {headers: {'X-BLACKCAT-TOKEN': credential}})
+    return fetch(ipAddress + '/api/event/' + eventId + '/likes', {
+        headers: {
+            'X-BLACKCAT-TOKEN': credential,
+            // 'Host': 'domain name'
+        }})
         .then(response => response.ok? response.json(): false)
-        .then(body => body? dispatch(receiveLikedUsers(body)): console.log('fail to fetch posts'))
+        .then(body => body? dispatch(receiveLikedUsers(body)): console.log('fail to fetch liked users'))
+}
+
+export const sendJoin = (eventId, credential) => dispatch => {
+    dispatch(sendingJoin())
+    return fetch(ipAddress + '/api/event/' + eventId + '/participants', {method: 'POST', headers: {'X-BLACKCAT-TOKEN': credential}})
+    .then(response => response.ok? dispatch(sendJoinSucc()): dispatch(sendJoinFail()))
+}
+
+export const cancelJoin = (eventId, credential, userId) => dispatch => {
+    dispatch(sendingJoin())
+    return fetch(ipAddress + '/api/event/' + eventId + '/participants/' + userId, {method: 'DELETE', headers: {'X-BLACKCAT-TOKEN': credential}})
+    .then(response => response.ok? dispatch(sendJoinSucc()): dispatch(sendJoinFail()))
+}
+
+export const requestJoinedUsers = (eventId, credential) => dispatch => {
+    dispatch(requestingJoinedUsers())
+    return fetch(ipAddress + '/api/event/' + eventId + '/participants', {headers: {'X-BLACKCAT-TOKEN': credential}})
+        .then(response => response.ok? response.json(): false)
+        .then(body => body? dispatch(receiveJoinedUsers(body)): console.log('fail to fetch joined users'))
+}
+
+export const requestUser = (userId, credential) => dispatch => {
+    dispatch(requestingUser())
+    return fetch(ipAddress + '/api/user/' + userId, {headers: {'X-BLACKCAT-TOKEN': credential}})
+        .then(response => response.ok? response.json(): false)
+        .then(body => body? dispatch(receiveUser(body)): console.log('fail to fetch user profile'))
+}
+
+export const requestUserLike = (userId, credential) => dispatch => {
+    dispatch(requestingUserLike())
+    return fetch(ipAddress + '/api/user/' + userId + '/events?type=liked', {headers: {'X-BLACKCAT-TOKEN': credential}})
+        .then(response => response.ok? response.json(): false)
+        .then(body => body? dispatch(receiveUserLike(body)): console.log('fail to fetch user likes'))
+}
+
+export const requestUserGoing = (userId, credential) => dispatch => {
+    dispatch(requestingUserGoing())
+    return fetch(ipAddress + '/api/user/' + userId + '/events?type=going', {headers: {'X-BLACKCAT-TOKEN': credential}})
+        .then(response => response.ok? response.json(): false)
+        .then(body => body? dispatch(receiveUserGoing(body)): console.log('fail to fetch user going'))
+}
+
+export const requestUserPast = (userId, credential) => dispatch => {
+    dispatch(requestingUserPast())
+    return fetch(ipAddress + '/api/user/' + userId + '/events?type=past', {headers: {'X-BLACKCAT-TOKEN': credential}})
+        .then(response => response.ok? response.json(): false)
+        .then(body => body? dispatch(receiveUserPast(body)): console.log('fail to fetch user past'))
 }

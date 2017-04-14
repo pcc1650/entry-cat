@@ -2,7 +2,7 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import { login } from '../actions'
-
+import '../sass/login.scss'
 
 class LoginForm extends React.Component{
     constructor(){
@@ -10,14 +10,14 @@ class LoginForm extends React.Component{
     }
     render(){
         return (
-            <form id='loginForm'>
-                <p>
-                    <input type='text' placeholder='Username' value={this.props.username} onChange={(e) => this.props.handleUsernameChange(e.target.value)}/>
-                </p>
-                <p>
-                    <input type='password' placeholder='Password' value={this.props.password} onChange={(e) => this.props.handlePasswordChange(e.target.value)}/>
-                </p>
-            </form>
+            <div>
+                <div className='login-input-container'>
+                    <input  type='text' placeholder='Username' className='login-input' value={this.props.username} onChange={(e) => this.props.handleUsernameChange(e.target.value)}/>
+                </div>
+                <div className='login-input-container'>
+                    <input type='password' placeholder='Password' className='login-input' value={this.props.password} onChange={(e) => this.props.handlePasswordChange(e.target.value)}/>
+                </div>
+            </div>
         )
     }
 }
@@ -58,16 +58,32 @@ class Login extends React.Component{
     render(){
         const { isLogining, loginFailed } = this.props
         return (
-            <div>
-                <LoginForm username={this.state.username} password={this.state.password} handleUsernameChange={(e) => this.handleUsernameChange(e)} handlePasswordChange={(e) => this.handlePasswordChange(e)}/>
-                <button onClick={(e) => this.handleLogin(e)} > Sign in </button>
-                {isLogining &&
-                    <h1> Logining </h1>
-                }
-                {loginFailed &&
-                    <h2>Username or password wrong!</h2>
-                }
-            </div>
+                <div className='login-container'>
+                    <div className='login-mask-1'>
+                        <p className='login-description'> FIND THE MOST LOVED ACTIVITIES </p>
+                        <p className='login-title'> BLACK CAT </p>
+                        <div className='login-outer-circle'>
+                            <div className='login-inner-circle'>
+                                <div className='login-logo-container'>
+                                    <img src='../SVGs/logo-cat-login.svg'/>
+                                </div>
+                            </div>
+                        </div>
+                        <div hidden={isLogining || loginFailed} className='login-notification-subsitute'></div>
+                        {isLogining &&
+                            <div className='login-notification'> Logining </div>
+                        }
+                        {loginFailed && !isLogining &&
+                            <div className='login-notification'>Username or password wrong!</div>
+                        }
+                        <div  className='login-form'>
+                            <LoginForm username={this.state.username} password={this.state.password} handleUsernameChange={(e) => this.handleUsernameChange(e)} handlePasswordChange={(e) => this.handlePasswordChange(e)}/>
+                        </div>
+                    </div>
+                    <div className='login-pic' />
+                    <div className='login-mask-2' />
+                    <div className='login-signIn' onClick={(e) => this.handleLogin(e)} > SIGN IN </div>
+                </div>
         )
     }
 }
@@ -91,6 +107,7 @@ const mapStateToProps = state => {
         loginFailed
     }
 }
+
 
 
 export default connect(mapStateToProps)(Login)

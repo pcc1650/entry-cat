@@ -4,6 +4,8 @@ import { requestPosts, switchingSearchBar, requestChannels, selectingChannel, re
 import PostThumbnail from './PostThumbnail'
 import SearchBar from './SearchBar'
 import{ browserHistory } from 'react-router'
+import Banner from './Banner'
+import '../sass/index.scss'
 
 class Index extends React.Component {
     componentWillMount(){
@@ -20,31 +22,36 @@ class Index extends React.Component {
         const { posts } = this.props
         browserHistory.push('/event/' + id)
     }
-
+    // handleProfileButton(e){
+    //     e.preventDefault()
+    //     browserHistory.push('/profile')
+    // }
 
 
     render() {
         const { userInfo, isFetchingPosts, posts, searchBar, channels, selectedChannel } = this.props
         const username = userInfo.username
         return (
-            <div>
-                <h1>Hello {username} !</h1>
-                {isFetchingPosts &&
-                    <h2>Fetching Posts</h2>
-                }
-                <div>
-                    <button onClick={(e) => this.handleSearchBarButton(e)}> SearchBar </button>
-                </div>
+            <div className='index-container'>
                 {searchBar &&
-                    <SearchBar channels={channels}/>
+                <SearchBar channels={channels} className='searchBar-container'/>
                 }
-                <div>
-                    {
-                        posts.map((post) => {
-                            return <PostThumbnail key={post['id']} username={post['creator']['username']} channel={post['channel']['name']} title={post['name']} startDate={post['begin_time']} endDate={post['end_time']} description={post['description']} id={post['id']}
-                            onClick={() => this.handleClickEvent(post['id'])}/>
-                        })
-                    }
+                <div className='index-mainpage-container'>
+                    <Banner userInfo={userInfo} handleClickSearchBar={(e) => this.handleSearchBarButton(e)}/>
+                    <div>
+                        {isFetchingPosts &&
+                            <h2>Fetching Posts</h2>
+                        }
+                    </div>
+                    <div style={marginStyle}></div>
+                    <div>
+                        {
+                            posts.map((post) => {
+                                return <PostThumbnail key={post['id']} post={post}
+                                onClick={() => this.handleClickEvent(post['id'])}/>
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         )
@@ -87,3 +94,7 @@ const mapStateToProps = state => {
 
 
 export default connect(mapStateToProps)(Index)
+
+const marginStyle = {
+    "marginTop": "10vh",
+}

@@ -1,0 +1,209 @@
+@import "color.scss";
+$font-stack:    Helvetica, sans-serif;
+$background-color: #EEE;
+$height: 1720px;
+$ratio: 320/572;
+$width: $height*$ratio;
+// body {
+//   font: 100% $font-stack;
+//   color: $primary-color;
+//   background-color: #333;
+// }
+
+// .container-outside {
+//     position: fixed;
+//     background-color: grey;
+//     bottom: 0;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+// }
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    // height: $height;
+    // width: $width;
+    justify-content: space-between;
+    position: relative;
+    // position: fixed;
+    // bottom: 0;
+    // top: 0;
+    // left: 0;
+    // right: 0;
+    height: 90vh;
+    width: 100vw;
+    align-items: center;
+}
+
+.login-signIn {
+    // width: $width;
+    left: 0;
+    right: 0;
+    height: 11%;
+    width: 100%;
+    background-color: $Complement;
+    text-align: center;
+    font-size: 3em;
+    color: $Primary-Dark;
+    line-height: 128px;
+    font-family: 'Source Sans Pro';
+
+}
+
+.login-pic {
+    // width: $width;
+    // height: 89%;
+    height:89%;
+    width: 100%;
+    background-size: 100% 100%;
+    background-image: url("../Imgs/Street-Dance-01.jpg");
+}
+
+.login-mask-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 89%;
+    position: absolute;
+    z-index: 101;
+
+}
+
+.login-mask-2 {
+    z-index: 100;
+    position: absolute;
+    background-color: $Primary;
+    opacity: 0.7;
+    width: 100%;
+    height: 89%;
+}
+
+.login-description {
+    font-family: 'Source Sans Pro';
+    font-weight: 100;
+    margin-top: 69px;
+    margin-bottom: 0px;
+    text-align: center;
+    color: $Complement;
+    font-size: 3em;
+}
+
+.login-title {
+    font-family: 'Source Sans Pro';
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 1vh;
+    text-align: center;
+    color: $Complement;
+    font-size: 4em;
+
+}
+
+.login-form{
+    margin-top: 10px;
+}
+
+.login-logo-container{
+    width: 70%;
+    height: 75%;
+    margin: auto;
+}
+
+.login-logo {
+    font-size: 100px;
+    width: 100px;
+    height: 100px;
+}
+
+
+.login-inner-circle {
+    width: 9.5vh; /* 20% of the viewport width */
+    height: 9.5vh;
+    border-radius: 100%;
+    border-color: $Complement;
+    border-style:solid;
+    border-width: 2px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.login-outer-circle {
+    width: 10vh;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    border-radius: 100%;
+    border-color: $Complement-Light;
+    border-style:solid;
+    border-width: 1px;
+}
+
+.login-input-container {
+    display:block;
+    margin-bottom: 2vh;
+    width: 60vw;
+    height: 5vh;
+    border-color: $Primary-Light;
+    border-style:solid;
+    border-radius: 50px;
+    border-width: 1px;
+}
+
+.login-input[type=text]{
+    font-size: 2.5em;
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    box-sizing: border-box;
+
+
+    background-image: url('../SVGs/user.svg');
+    background-position: 5px 5px;
+    background-repeat: no-repeat;
+    padding-left: 100px;
+}
+
+.login-input[type=password]{
+    font-size: 2.5em;
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    box-sizing: border-box;
+
+
+    background-image: url('../SVGs/password.svg');
+    background-position: 3px 3px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    padding-left: 100px;
+}
+
+.login-input:focus {
+    border: none;
+    background-color: #FFFFFF;
+    opacity: 0.5;
+    border-style:solid;
+    border-radius: 50px;
+    border-width: 1px;
+}
+
+*::-webkit-input-placeholder {
+    color: #AC8EC9;
+}
+
+.login-notification {
+    font-size: 3em;
+    color: red;
+    height: 70px;
+    margin-top: 15%;
+}
+
+.login-notification-subsitute {
+    height: 70px;
+    margin-top: 15%;
+}

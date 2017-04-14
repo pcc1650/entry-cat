@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { requestPosts, switchingSearchBar, requestChannels, selectingChannel, removingChannel, requestComments, postComment, enableCommentInput, disableCommentInput, sendLike, cancelLike, requestLikedUsers} from '../actions'
+import { requestPosts, switchingSearchBar, requestChannels, selectingChannel, removingChannel, requestComments, postComment, enableCommentInput, disableCommentInput, sendLike, cancelLike, requestLikedUsers, sendJoin, cancelJoin, requestJoinedUsers} from '../actions'
 import PostThumbnail, { downBorder } from './PostThumbnail'
 import Comment from './Comment'
 import Comments from './Comments'
@@ -13,6 +13,7 @@ class EventPage extends React.Component {
         this.state = {
             commentInputContent: '',
             liked: false,
+            joined: false,
         }
     }
 
@@ -21,10 +22,12 @@ class EventPage extends React.Component {
         const { dispatch, userToken: credential} = this.props
         dispatch(requestComments(this.props.params.id, credential))
         dispatch(requestLikedUsers(this.props.params.id, credential))
+        dispatch(requestJoinedUsers(this.props.params.id, credential))
+
     }
 
     componentWillReceiveProps(nextProps){
-        const { dispatch, userToken: credential, isPosted, replyTo, likedUsers, userInfo, sentLike} = nextProps
+        const { dispatch, userToken: credential, isPosted, replyTo, likedUsers, userInfo, sentLike, joinedUsers} = nextProps
         // update comments
         if(isPosted){
             dispatch(requestComments(this.props.params.id, credential))
@@ -33,11 +36,13 @@ class EventPage extends React.Component {
         const standardReply = replyTo!==''? '@'+replyTo+': ': ''
         this.setState({commentInputContent: standardReply})
         // judge if user already liked this post
-        let userSet= new Set()
-        likedUsers.map(likedUser => userSet.add(likedUser.username))
-        console.log('&&&')
-        console.log(userSet)
-        userSet.has(userInfo.username) ? this.setState({liked: true}): this.setState({liked: false})
+        let likedUserSet= new Set()
+        likedUsers.map(likedUser => likedUserSet.add(likedUser.username))
+        likedUserSet.has(userInfo.username) ? this.setState({liked: true}): this.setState({liked: false})
+        // judge if user already joined this post
+        let joinedUserSet= new Set()
+        joinedUsers.map(joinedUser => joinedUserSet.add(joinedUser.username))
+        joinedUserSet.has(userInfo.username) ? this.setState({joined: true}): this.setState({joined: false})
     }
 
     handleCommentChange(content){
@@ -72,6 +77,15 @@ class EventPage extends React.Component {
         this.state.liked? dispatch(cancelLike(this.props.params.id, credential, userInfo.id)): dispatch(sendLike(this.props.params.id, credential))
         setTimeout(()=>{
             dispatch(requestLikedUsers(this.props.params.id, credential))
+        }, 100)
+    }
+
+    handleClickJoin(e){
+        const { dispatch, userToken: credential, joined, userInfo} = this.props
+        e.preventDefault()
+        this.state.joined? dispatch(cancelJoin(this.props.params.id, credential, userInfo.id)): dispatch(sendJoin(this.props.params.id, credential))
+        setTimeout(()=>{
+            dispatch(requestJoinedUsers(this.props.params.id, credential))
         }, 100)
     }
 
@@ -139,7 +153,7 @@ class EventPage extends React.Component {
                     (<div>
                         <button onClick={(e) => this.handleClickComment(e)}>Comment</button>
                         <button onClick={(e) => this.handleClickLike(e)}>{this.state.liked? <p>liked</p>:<p>like</p>}</button>
-                        <button>Join</button>
+                        <button onClick={(e) => this.handleClickJoin(e)}>{this.state.joined? <p>joined</p>:<p>join</p>}</button>
                     </div>) :
                     <div>
                         <button onClick={(e) => this.handleClickCancel(e)}>Cancel</button>
@@ -153,7 +167,7 @@ class EventPage extends React.Component {
 }
 
 const mapStateToProps = state => {
-    const { loginRequest, fetchPosts, fetchComments, postCommentRequest, toggleCommentInput, toggleEventLike, fetchLikedUsers } = state
+    const { loginRequest, fetchPosts, fetchComments, postCommentRequest, toggleCommentInput, toggleEventLike, fetchLikedUsers, fetchJoinedUsers } = state
     const {
         userInfo,
         userToken,
@@ -183,6 +197,11 @@ const mapStateToProps = state => {
     const {
         isFetchingLikedUsers, likedUsers
     } = fetchLikedUsers
+
+    const {
+        isFetchingJoinedUsers, joinedUsers
+    } = fetchJoinedUsers
+
     return {
         userInfo,
         userToken,
@@ -196,12 +215,14 @@ const mapStateToProps = state => {
         sentLike,
         isFetchingLikedUsers,
         likedUsers,
+        isFetchingJoinedUsers,
+        joinedUsers,
     }
 }
 
 
 
-const tabStyle = {
+export const tabStyle = {
     display: "flex",
     flexDirection: "row",
     width: "1000px",
@@ -210,7 +231,7 @@ const tabStyle = {
 }
 
 
-const singleTab = {
+export const singleTab = {
     width: "333px",
     height: "100px",
     border: "1px solid black",

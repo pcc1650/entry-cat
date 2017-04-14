@@ -10,6 +10,7 @@ import App from './containers/App'
 import Login from './components/Login'
 import Index from './components/Index'
 import EventPage from './components/EventPage'
+import Profile from './components/profile'
 
 const middleware = [ thunk, createLogger() ]
 
@@ -26,6 +27,7 @@ render((
                 <IndexRoute component={Index} />
                 <Route path='login' component={Login} />
                 <Route path='event/:id' component={EventPage} />
+                <Route path='profile' component={Profile} />
             </Route>
         </Router>
     </Provider>

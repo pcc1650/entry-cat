@@ -1,0 +1,13 @@
+@import "color.scss";
+
+
+.index-container {
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    position: relative;
+}
+
+.index-mainpage-container {
+    height: 100%;
+}

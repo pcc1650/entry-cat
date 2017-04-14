@@ -1,0 +1,78 @@
+@import "color.scss";
+
+
+.postThumbnail-container {
+    margin: 16px;
+}
+
+.postThumbnail-title {
+    color: $Primary-Dark;
+    font-family: 'Source Sans Pro';
+    font-size: 4.5vh;
+    margin-top: 0;
+}
+
+.postThumbnail-downBorder {
+    height: 5px;
+    background-color: #E8E8E8;
+}
+
+
+.postThumbnail-user-info {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+.postThumbnail-username {
+    font-size: 3vh;
+    font-family: 'Source Sans Pro';
+    color: $Primary-Neutral;
+    // line-height: 3vh;
+}
+
+.postThumbnail-channel-container{
+    height: 3.5vh;
+    border-radius: 30px;
+    border-color: $Primary-Light;
+    border-style:solid;
+    border-width: 1px;
+    margin-left:auto;
+    margin-right:0;
+}
+
+.postThumbnail-channel {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 3vh;
+    font-family: 'Source Sans Pro';
+    color: $Primary;
+}
+
+
+.postThumbnail-userImg{
+    border-radius:50%;
+    width:3.5vh;
+    height: 3.5vh;
+    margin-right: 20px;
+}
+
+.postThumbnail-time{
+    color: $Primary;
+    font-size: 1vh;
+    font-family: 'Source Sans Pro';
+    display: inline;
+}
+
+.postThumbnail-description{
+    color: $Primary-Neutral;
+    font-size: 1vh;
+    font-family: 'Source Sans Pro';
+}
+
+.postThumbnail-time-logo{
+    width: 2vh;
+    height: 2vh;
+    fill: red;
+    display: inline;
+    margin-right: 10px;
+}
