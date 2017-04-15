@@ -9,24 +9,24 @@
     height: 7vh;
     background-color: $Primary;
     z-index: 10;
-    // display: flex;
+    display: flex;
     // flex-direction: row;
-    // justify-content: space-between;
+    justify-content: space-between;
     // align-items: center;
 }
 
 .banner-search{
-    position: fixed;
     height: 5vh;
     width: 5vh;
     top: 0;
-    left: 16px;
+    margin-left: 16px;
     margin-top: 1vh;
     background-image: url('../SVGs/search-index.svg');
 }
 
 .banner-logo{
-    position: fixed;
+    // position: fixed;
+    margin-top: 16px;
     height: 5vh;
     width: 5vh;
     text-align: center;
@@ -36,14 +36,24 @@
 }
 
 .banner-avatar{
-    position: fixed;
-    right: 16px;
+    // position: fixed;
+    margin-right: 16px;
     top: 0;
     height: 5vh;
     width: 5vh;
     margin-top: 1vh;
     // padding-top: 5px;
     z-index: 11;
+}
+
+.banner-home{
+    // position: fixed;
+    height: 5vh;
+    width: 5vh;
+    top: 0;
+    margin-left: 16px;
+    margin-top: 1vh;
+    background-image: url('../SVGs/home-profile.svg');
 }
 
 

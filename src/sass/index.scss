@@ -4,10 +4,16 @@
 .index-container {
     display: flex;
     flex-direction: row;
-    overflow: scroll;
-    position: relative;
+    // overflow: scroll;
+    // position: relative;
 }
 
 .index-mainpage-container {
     height: 100%;
+}
+
+.index-searchBar-container {
+    background-color: $Primary-Dark;
+    width: 75vw;
+    height: 100vw;
 }

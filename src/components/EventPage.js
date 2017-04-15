@@ -5,7 +5,8 @@ import PostThumbnail, { downBorder } from './PostThumbnail'
 import Comment from './Comment'
 import Comments from './Comments'
 import CommentInput from './CommentInput'
-
+import Banner from './Banner'
+import '../sass/event.scss'
 
 class EventPage extends React.Component {
     constructor(){
@@ -91,21 +92,37 @@ class EventPage extends React.Component {
 
 
     render() {
-        const { posts, comments, commentInput, replyTo, likedUsers} = this.props
+        const { userInfo, posts, comments, commentInput, replyTo, likedUsers} = this.props
         const { id } = this.props.params
         const post = posts.filter(post => post.id == id)
         const postInfo = post[0]
         const beginTime = new Date(postInfo['begin_time']*1000)
         const endTime = new Date(postInfo['end_time']*1000)
+        const indexPath = false
+        const createTime = postInfo['create_time'] * 1000
+        const currentTime =  + new Date()
+        const daysBefore = Math.round((currentTime - createTime)/(24*60*60*1000))
 
+        
         return (
             <div>
-                <h1>This is event {id} page.</h1>
-                <div>
-                    <p>{postInfo['channel']['name']}</p>
-                    <p>{postInfo['name']}</p>
-                    <p>{postInfo['creator']['username']}</p>
-                    <img src={postInfo['creator']['avatar']} />
+                <Banner userInfo={userInfo}  indexPath={indexPath}/>
+                <div className='event-channel-container-container'>
+                    <div className='event-channel-container'>
+                        <div className='event-channel'>
+                            {postInfo['channel']['name']}
+                        </div>
+                    </div>
+                </div>
+                <div className='event-title'>
+                    {postInfo['name']}
+                </div>
+                <div className='evnet-userInfo-container'>
+                    <img src={postInfo['creator']['avatar']} className='event-userInfo-img'/>
+                    <div className='event-userInfo-words'>
+                        <div className='event-userInfo-username'>{postInfo['creator']['username']}</div>
+                        <div className='event-userInfo-pubTime'>Published {daysBefore} days ago</div>
+                    </div>
                 </div>
                 <div style={tabStyle}>
                     <div style={singleTab}>
@@ -228,6 +245,9 @@ export const tabStyle = {
     width: "1000px",
     height: "120px",
     backgroundColor: "#EEE",
+    position: "sticky",
+    top: "50vh",
+    position: "-webkit-sticky",
 }
 
 

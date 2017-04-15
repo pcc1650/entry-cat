@@ -18,7 +18,7 @@ class SearchBar extends React.Component {
     }
     render(){
         return (
-            <div className='searchBar-container'>
+            <div>
                 <Channels channels={this.props.channels}/>
                 <button onClick={(e) => this.handleClick(e)}> Search </button>
             </div>

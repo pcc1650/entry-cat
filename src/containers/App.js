@@ -20,7 +20,7 @@ import { connect } from 'react-redux'
         browserHistory.push('/login')
     }
     render(){
-        console.log(this.props.location.pathname)
+        // console.log(this.props.location.pathname)
         if (this.props.location.pathname == '/login' )
             return this.props.children
 

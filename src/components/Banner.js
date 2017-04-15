@@ -9,19 +9,26 @@ class Banner extends React.Component {
     constructor(){
         super()
         this.state = {
-
         }
     }
     handleClickAvatar(e){
         e.preventDefault()
         browserHistory.push('/profile')
     }
+    handleClickHome(e){
+        e.preventDefault()
+        browserHistory.push('/')
+    }
     render(){
         // const { userInfo } = this.props.userInfo
         return (
             <div className='banner-container'>
-                <div className='banner-search' onClick={this.props.handleClickSearchBar}>
-                </div>
+                {this.props.indexPath ?
+                    <div className='banner-search' onClick={this.props.handleClickSearchBar}>
+                    </div> :
+                    <div className='banner-home' onClick={(e) => this.handleClickHome(e)}>
+                    </div>
+                }
                 <div className='banner-logo'>
                 </div>
                 <div className='banner-avatar' onClick={(e) => this.handleClickAvatar(e)}>

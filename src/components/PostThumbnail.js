@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import '../sass/PostThumbnail.scss'
+import '../sass/downBorder.scss'
 import {dateFormat} from '../date.js'
 
 export default class PostThumbnail extends React.Component {
@@ -23,6 +24,20 @@ export default class PostThumbnail extends React.Component {
         const standardStartDate = new Date(startDate*1000)
         const standardEndDate = new Date(endDate*1000)
         const descriptionRestricted = description.length > 300 ? description.substring(0, 300) + '...' : description
+
+        const userLike = this.props.userLike.events
+        const userGoing = this.props.userGoing.events
+
+        let userLikeId = []
+        let userGoingId = []
+
+        if(userLike && userLike.length !== 0){
+            userLikeId = userLike.map(like => like.id)
+        }
+
+        if(userGoing && userGoing.length !== 0){
+            userGoingId = userGoing.map(going => going.id)
+        }
 
         return (
             <div onClick={onClick} className='postThumbnail-container'>
@@ -47,19 +62,37 @@ export default class PostThumbnail extends React.Component {
                     { descriptionRestricted }
                 </div>
                 <div className='postThumbnail-going-like'>
-                    <p>going</p>
-                    <p>like</p>
+                    {userGoingId.includes(id) ?
+                        <div className='postThumbnail-going-like-true'>
+                            <img src='../SVGs/checked-index.svg' className='postThumbnail-going-like-logo' />
+                            <div>I am going</div>
+                        </div> :
+                        <div className='postThumbnail-going-like-false'>
+                            <img src='../SVGs/check-index.svg' className='postThumbnail-going-like-logo' />
+                            <div>0 Going</div>
+                        </div>
+                    }
+                    {userLikeId.includes(id) ?
+                        <div className='postThumbnail-going-like-true'>
+                            <img src='../SVGs/liked-index.svg' className='postThumbnail-going-like-logo' />
+                            <div>I like it</div>
+                        </div> :
+                        <div className='postThumbnail-going-like-false'>
+                            <img src='../SVGs/like-index.svg' className='postThumbnail-going-like-logo' />
+                            <div>0 Like</div>
+                        </div>
+                    }
                 </div>
-                <div className='postThumbnail-downBorder'>
+                <div className='downBorder'>
                 </div>
             </div>
         )
     }
 }
 
-const PostThumbnailStyle = {
-    height: "500px",
-    width: "1000px",
-    border: "1px solid black",
-    padding: "2px",
-}
+// const PostThumbnailStyle = {
+//     height: "500px",
+//     width: "1000px",
+//     border: "1px solid black",
+//     padding: "2px",
+// }
