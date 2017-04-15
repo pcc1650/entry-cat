@@ -1,5 +1,8 @@
 @import "color.scss";
 
+.event-container{
+    background-color: #FAF9FC
+}
 
 .event-channel-container{
     margin-top: 10vh;
@@ -34,7 +37,7 @@
     margin-left: 16px;
 }
 
-.evnet-userInfo-container{
+.event-userInfo-container{
     display: flex;
     flex-direction: row;
     margin-bottom: 30px;
@@ -64,3 +67,329 @@
         font-family: 'Source Sans Pro';
     }
 }
+
+// .event-tabs-container {
+//     height: 7vh;
+//     top: 7vh;
+//     position: sticky;
+//     display: flex;
+//     flex-direction: row;
+// }
+
+
+
+.event-tab-wrapper {
+    // margin-top: 20px;
+    // margin-bottom: 20px;
+    background-color: #FAF9FC;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 7vh;
+    position: sticky;
+    top: 7vh;
+}
+
+.event-tab-wrapper .event-tab-radio{
+  display: none;
+}
+
+.event-tab-handler{
+  display: block;
+  height: 60px;
+  padding-left: 10px;
+  color: #8C8C8C;
+  font-size: 2vh;
+  line-height: 60px;
+  // background-color: #D5EF7F
+}
+.event-tab-radio:checked + .event-tab-handler{
+  color: $Complement-Dart-1;
+  // background-color: #e74c3c;
+  transform: scale(1);
+}
+
+.event-tab-img{
+    height: 2vh;
+    width: 2vh;
+}
+
+.event-single-tab-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.event-description{
+    margin-left: 16px;
+    margin-bottom: 30px;
+    top: 14vh;
+}
+.event-description-words{
+    margin-top: 30px;
+    font-size: 2.5vh;
+    font-family: 'Source Sans Pro';
+    color: $Primary-Neutral;
+}
+
+.event-when-container{
+    margin-left: 16px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    .event-when-title  {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 30px;
+        .event-when-decorator{
+            height: 3vh;
+            width: 10px;
+            background-color: $Primary;
+            margin-right: 15px;
+        }
+        .event-when-words{
+            font-size: 3vh;
+            font-family: 'Source Sans Pro';
+            color: $Primary;
+        }
+    }
+
+    .event-when-time{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .event-when-beginTime{
+            margin-left: 8vw;
+            width: 40vw;
+        }
+        .event-when-separator{
+            width: 5px;
+            height: 13vh;
+            background-color: #E8E8E8;
+        }
+        .event-when-endTime{
+            margin-right: 8vw;
+            width: 40vw;
+        }
+    }
+}
+
+.event-when-logo{
+    width: 3vh;
+    height: 3vh;
+    margin-right: 20px;
+}
+
+.event-when-date{
+    height: 4vh;
+    margin-bottom: 1vh;
+    // background-color: red;
+    display: flex;
+    flex-direction: row;
+    color: $Primary-Neutral;
+    font-size: 2vh;
+    font-family: 'Source Sans Pro';
+    justify-content: center;
+    align-items: center;
+}
+.event-when-hour{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 5vh;
+    align-items: center;
+}
+
+.event-when-hour-hour{
+    color: $Complement-Dart-1;
+    font-size: 5vh;
+    font-family: 'Source Sans Pro';
+    margin-right: 20px;
+}
+
+.event-when-hour-am{
+    color: $Complement-Dart-1;
+    font-size: 2vh;
+    font-family: 'Source Sans Pro';
+    align-self: flex-end;
+    margin-bottom: 5px;
+}
+
+.event-where-container{
+    margin-bottom: 30px;
+    margin-left: 16px;
+    margin-top: 30px;
+}
+
+.event-where-title  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+    .event-where-decorator{
+        height: 3vh;
+        width: 10px;
+        background-color: $Primary;
+        margin-right: 15px;
+    }
+    .event-where-words{
+        font-size: 3vh;
+        font-family: 'Source Sans Pro';
+        color: $Primary;
+    }
+}
+
+.event-where-info{
+    font-size: 3vh;
+    font-family: 'Source Sans Pro';
+    color: $Primary-Neutral;
+}
+
+.event-going-container{
+    margin-left: 16px;
+    margin-bottom: 30px;
+    margin-top: -14vh;
+    padding-top: 14vh;
+    margin-right: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center
+}
+
+.event-going-logo{
+    width: 2.5vh;
+    height: 2.5vh;
+    margin-right: 15px;
+}
+
+.downBorder-30{
+    height: 5px;
+    background-color: #E8E8E8;
+    margin-bottom: 30px;
+}
+
+.event-going-words{
+    font-size: 2.5vh;
+    width: 10vh;
+    margin-right: 20px;
+    font-family: 'Source Sans Pro';
+    color: $Primary-Neutral;
+}
+
+.event-going-avatars{
+    width: 3vh;
+    height: 3vh;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.event-comments-container{
+    margin: 16px;
+}
+
+.event-operation-container {
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+}
+
+.event-operation-purple {
+    background-color: $Primary;
+    width: 56vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.event-operation-green {
+    background-color: $Complement;
+    width: 44vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5vh;
+    font-family: 'Source Sans Pro';
+    color: #788C36;
+}
+
+.event-operation-comment{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-operation-like{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-operation-logo{
+    width: 4vh;
+    height: 4vh;
+    margin-right: 20px;
+}
+
+.event-operation-comment-container{
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+}
+
+.event-operation-comment-purple{
+    background-color: $Primary;
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-operation-comment-green{
+    background-color: $Complement;
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-operation-comment-logo {
+    width: 5vh;
+    height: 5vh;
+}
+
+.event-operation-comment-cancel-logo {
+    width: 3.5vh;
+    height: 3.5vh;
+    margin-right: 20px;
+}
+
+.event-bottom-margin{
+    height: 8vh;
+}
+
+// .event-operation-comment-input {
+//     width: 63vw;
+//     height: 5vh;
+//     border-radius: 50px;
+//     font-size: 2.5vh;
+//     padding-left: 20px;
+// }
+//
+// .event-going-wrapper{
+//     position:relative;
+//     top: -14vh;
+// }

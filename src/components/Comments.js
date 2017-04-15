@@ -13,7 +13,6 @@ export default class Comments extends React.Component {
         // console.log(channels)
         return (
             <div>
-                <p> Comments </p>
                 <div>
                 {
                     comments.map((comment) => {

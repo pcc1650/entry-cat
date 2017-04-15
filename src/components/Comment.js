@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { downBorder } from './PostThumbnail'
 import { replyComment } from '../actions'
+import '../sass/comment.scss'
+
+
 
 class Comment extends React.Component {
     constructor(){
@@ -16,21 +19,23 @@ class Comment extends React.Component {
         const { avatar, username, time, comment } = this.props
         const standardTime = new Date(time*1000)
         return (
-            <div>
-                <div>
-                    <img src={avatar}/>
-                </div>
-                <div>
-                    { username }
-                </div>
-                <div>
-                    { standardTime.toLocaleDateString() + ' ' + standardTime.toLocaleTimeString() }
-                </div>
-                <div>
-                    { comment }
-                </div>
-                <button onClick={(e) => this.handleClickReply(e)}> Reply </button>
-                <div style={ downBorder }>
+            <div className='comment-container'>
+                <img src={avatar} className='comment-avatar'/>
+                <div className='comment-content-container'>
+                    <div className='comment-content-info'>
+                        <div>
+                            <div className='comment-content-username'>
+                                { username }
+                            </div>
+                            <div className='comment-content-time'>
+                                { standardTime.toLocaleDateString() + ' ' + standardTime.toLocaleTimeString() }
+                            </div>
+                        </div>
+                        <div className='comment-content-reply' onClick={(e) => this.handleClickReply(e)}></div>
+                    </div>
+                    <div className='comment-content'>
+                        { comment }
+                    </div>
                 </div>
             </div>
         )

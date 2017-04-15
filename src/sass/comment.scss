@@ -1,0 +1,78 @@
+@import "color.scss";
+
+.comment-container {
+    margin-top: -14vh;
+    padding-top: 14vh;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.comment-avatar {
+    border-radius: 50%;
+    height: 5vh;
+    width: 5vh;
+    margin-right: 20px;
+}
+
+.comment-content-container{
+
+}
+
+.comment-content-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width:80vw;
+    justify-content: space-between;
+}
+
+.comment-content-username{
+    color: $Primary;
+    font-family: 'Source Sans Pro';
+    font-size: 2vh;
+    margin-right: 40px;
+}
+
+.comment-content-time{
+    color: #BABABA;
+    font-family: 'Source Sans Pro';
+    font-size: 1.5vh;
+}
+
+.comment-content-reply{
+    right: 16px;
+    height: 2vh;
+    width: 2vh;
+    background-image: url(../SVGs/reply.svg);
+}
+
+.comment-content{
+    color: $Primary-Neutral;
+    font-family: 'Source Sans Pro';
+    font-size: 2.5vh;
+    width: 75vw;
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 30vw;
+    margin-left: -125px;
+    background-color: #E5F7A9;
+    color: $Primary;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 101;
+    left: 35vw;
+    bottom: 15%;
+    font-size: 3vh;
+    font-family: 'Source Sans Pro';
+    opacity: 0.9;
+}
+
+#snackbar.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}

@@ -7,8 +7,16 @@ export default class CommentInput extends React.Component {
     render(){
         return (
             <div>
-                <input onChange={(e) => this.props.handleCommentChange(e.target.value)} value={this.props.value} type='text' placeholder='Leave your comment here'/>
+                <input style={inputStyle} onChange={(e) => this.props.handleCommentChange(e.target.value)} value={this.props.value} type='text' placeholder='Leave your comment here'/>
             </div>
         )
     }
+}
+
+const inputStyle = {
+    "width": "63vw",
+    "height": "5vh",
+    borderRadius: "50px",
+    fontSize: "2.5vh",
+    paddingLeft: "20px",
 }
