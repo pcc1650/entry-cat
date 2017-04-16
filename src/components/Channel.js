@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { selectingChannel, removingChannel } from '../actions'
+import '../sass/searchBar.scss'
+
 
 class Channel extends React.Component {
     constructor(){
@@ -10,7 +12,6 @@ class Channel extends React.Component {
         }
     }
     handleClick(e){
-        e.preventDefault()
         const { id, dispatch } = this.props
         !this.state.actived ? dispatch(selectingChannel(id)) : dispatch(removingChannel(id))
         this.setState({actived: !this.state.actived})
@@ -19,7 +20,7 @@ class Channel extends React.Component {
         const { name, id } = this.props
         return (
             <div>
-                <button onClick={(e) => this.handleClick(e)}>{ name }</button>
+                <div className={this.state.actived?'searchBar-channel-block-activated': 'searchBar-channel-block'} onClick={(e) => this.handleClick(e)}>{ name }</div>
             </div>
         )
     }

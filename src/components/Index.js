@@ -36,8 +36,10 @@ class Index extends React.Component {
         const indexPath = true
         return (
             <div className='index-container'>
+                <input type='checkbox' id='searchBarCheckbox'/>
+                <label htmlFor='searchBarCheckbox' className='index-label'></label>
                 <div className='index-searchBar-container'>
-                    <SearchBar channels={channels} />
+                    <SearchBar channels={channels.slice(0, 11)} />
                 </div>
 {/*                <div className='index-mainpage-container'> */}
                 <Banner userInfo={userInfo} handleClickSearchBar={(e) => this.handleSearchBarButton(e)} indexPath={indexPath}/>
@@ -46,10 +48,17 @@ class Index extends React.Component {
                 */}
                 <div className='index-mainpage-container'>
                 {
+                    posts.length !== 0 ?
                     posts.map((post) => {
                         return <PostThumbnail key={post['id']} post={post} userLike={userLike} userGoing={userGoing}
                         onClick={() => this.handleClickEvent(post['id'])}/>
-                    })
+                    }) :
+                    <div className='index-no-activity'>
+                        <img src='../SVGs/no-activity-profile.svg' className='index-noActivity-img' />
+                        <div className='index-noActivity-word'>
+                            No activity found
+                        </div>
+                    </div>
                 }
                 </div>
             </div>

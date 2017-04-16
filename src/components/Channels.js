@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Channel from './Channel'
-
+import '../sass/searchBar.scss'
 
 export default class Channels extends React.Component {
     constructor(){
@@ -12,9 +12,10 @@ export default class Channels extends React.Component {
         // console.log('***')
         // console.log(channels)
         return (
-            <div>
-                <h2> CHANNEL </h2>
-                <div>
+            <div className='searchBar-channel-block-container'>
+                <div className='searchBar-channel-title'> CHANNEL </div>
+                <div className='searchBar-channel-underline'></div>
+                <div className='searchBar-channels-container'>
                     <Channel key='all' name='ALL' id='all'/>
                     {
                         channels.map((channel) => {

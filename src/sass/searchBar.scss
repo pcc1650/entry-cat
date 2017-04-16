@@ -1,1 +1,137 @@
 @import "color.scss";
+
+.searchBar-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 93vh;
+    width: 100%;
+}
+
+.searchBar-search-container{
+    bottom: 0;
+    height: 10vh;
+    background-color: $Complement;
+    width: 75vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vh;
+    font-family: 'Source Sans Pro';
+    color: $Primary-Dark
+}
+
+.searchBar-channel-block{
+    height: 4vh;
+    width: 11vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 35px;
+    color: #FFFFFF;
+    font-size: 2vh;
+    font-family: 'Source Sans Pro';
+    // border-width: 10px;
+    border-color: #FFFFFF;
+    border-style: solid;
+    margin: 10px;
+}
+
+.searchBar-channel-block-activated{
+    height: 4vh;
+    width: 11vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 35px;
+    color: $Primary-Dark;
+    font-size: 2vh;
+    font-family: 'Source Sans Pro';
+    // border-width: 10px;
+    background-color: $Complement-Light;
+    border-style: solid;
+    margin: 10px;
+}
+
+.searchBar-channels-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 60px;
+    align-items: center;
+}
+
+.searchBar-channel-title{
+    font-size: 2vh;
+    font-family: 'Source Sans Pro';
+    // border-width: 10px;
+    color: $Primary;
+}
+
+.searchBar-channel-underline{
+    width: 12vh;
+    margin-bottom: 30px;
+    height: 5px;
+    background-color: $Primary
+}
+
+.searchBar-channel-block-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.searchBar-date-title{
+    font-size: 2vh;
+    font-family: 'Source Sans Pro';
+    // border-width: 10px;
+    color: $Primary;
+}
+
+.searchBar-date-underline{
+    width: 6vh;
+    margin-bottom: 30px;
+    height: 5px;
+    background-color: $Primary
+}
+
+.searchBar-date-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16vh;
+    margin-top: 16px
+}
+
+.searchBar-date-timepicker{
+    height: 6vh;
+    width: 25vw;
+    font-size: 2vh;
+    font-family: 'Source Sans Pro';
+    color: $Primary;
+    margin-left: 45px;
+    background-color: #FFFFFF
+}
+
+
+.searchBar-date-date-container{
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    height: 8vh;
+    width: 65vw;
+    justify-content: center;
+    align-items: center;
+    border:none;
+    outline:none;
+}
+
+.searchBar-date-img{
+    margin-left: 20px;
+    height: 5vh;
+    width: 3vh;
+}

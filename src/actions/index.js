@@ -213,7 +213,11 @@ export const requestPosts = (credential) => dispatch => {
 }
 
 export const requestPostsWithFilter = (credential, filterCondition) => dispatch => {
-    let url = ipAddress + '/api/events?channels=' + filterCondition.selectedChannel.toString()
+    let url =
+    (filterCondition.selectedChannel.length === 0 || filterCondition.selectedChannel.includes('all')) ?
+    ipAddress + '/api/events?' + 'before=' + filterCondition.before + '&&' + 'after=' + filterCondition.after :
+    ipAddress + '/api/events?channels=' + filterCondition.selectedChannel.toString() + '&&' + 'before=' + filterCondition.before + '&&' + 'after=' + filterCondition.after
+    console.log(url)
     dispatch(requestingPosts())
     return fetch(url, {headers: {'X-BLACKCAT-TOKEN': credential}})
         .then(response => response.ok? response.json(): false)
