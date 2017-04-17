@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { tabStyle, singleTab } from './EventPage'
-import { requestUser, requestUserLike, requestUserGoing, requestUserPast } from '../actions'
+import { requestUser, requestUserLike, requestUserGoing, requestUserPast, logout} from '../actions'
+import { browserHistory } from 'react-router'
 import PostThumbnail from './PostThumbnail'
 import Banner from './Banner'
 import '../sass/profile.scss'
@@ -40,6 +41,10 @@ class Profile extends React.Component{
     handleClickPast(e){
         this.setState({tab: 'past'})
     }
+    handleClickLogout(){
+        const { dispatch, userToken: credential} = this.props
+        dispatch(logout(credential))
+    }
     render(){
         const { user, userLike, userGoing, userPast, userInfo} = this.props
         // console.log('*********')
@@ -64,6 +69,9 @@ class Profile extends React.Component{
                     <div className='profile-email'>
                         <img src='../SVGs/email-profile.svg' className='profile-email-logo' />
                         <div>{user.email}</div>
+                    </div>
+                    <div className='profile-logout' onClick={() => this.handleClickLogout()}>
+                        Logout
                     </div>
                 </div>
                 <div className='downBorder'></div>
@@ -117,7 +125,7 @@ class Profile extends React.Component{
                 {this.state.tab == 'likes' &&
                  (!userLike.events.length == 0?
                     userLike.events.map(event => (<PostThumbnail key={event.id} post={event} userLike={userLike} userGoing={userGoing}/>)):
-                    <div>
+                    <div className='profile-no-activity'>
                     <img src='../SVGs/no-activity-profile.svg' className='profile-noActivity-img' />
                     <div className='profile-noActivity-word'>No activity found</div>
                     </div>
@@ -125,7 +133,7 @@ class Profile extends React.Component{
                 {this.state.tab == 'going' &&
                  (!userGoing.events.length == 0?
                     userGoing.events.map(event => (<PostThumbnail key={event.id} post={event} userLike={userLike} userGoing={userGoing}/>)):
-                    <div>
+                    <div className='profile-no-activity'>
                     <img src='../SVGs/no-activity-profile.svg' className='profile-noActivity-img' />
                     <div className='profile-noActivity-word'>No activity found</div>
                     </div>

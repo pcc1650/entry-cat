@@ -41,7 +41,8 @@
 }
 
 .comment-content-reply{
-    right: 16px;
+    position: absolute;
+    right: 40px;
     height: 2vh;
     width: 2vh;
     background-image: url(../SVGs/reply.svg);

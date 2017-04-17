@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import * as Actions from '../actions'
 
-const loginRequest = (state = {isLogining: false, isLogined: false, loginFailed: false}, action) => {
+const loginRequest = (state = {isLogining: false, isLogined: false, loginFailed: false, userToken: localStorage.getItem('userToken'), userInfo: JSON.parse(localStorage.getItem('userInfo'))}, action) => {
     switch (action.type) {
         case Actions.LOGINING_REQUEST:
             return {
@@ -24,6 +24,33 @@ const loginRequest = (state = {isLogining: false, isLogined: false, loginFailed:
                 ...state,
                 isLogining: false,
                 loginFailed: true,
+            }
+        case Actions.CLEAR_LOGIN_REDUCER:
+            return {
+                ...state,
+                userToken: null,
+                userInfo: null,
+            }
+        default:
+            return state
+    }
+}
+
+const logoutRequest = (state = {}, action) => {
+    switch (action.type) {
+        case Actions.LOGOUTING_REQUEST:
+            return {
+                ...state,
+                // username: action.username,
+                // password: action.password,
+            }
+        case Actions.LOGOUT_REQUEST_SUCC:
+            return {
+                ...state,
+            }
+        case Actions.LOGOUT_REQUEST_FAIL:
+            return {
+                ...state,
             }
         default:
             return state
@@ -321,6 +348,7 @@ const rootReducer = combineReducers ({
     fetchUserLike,
     fetchUserGoing,
     fetchUserPast,
+    logoutRequest,
 })
 
 export default rootReducer

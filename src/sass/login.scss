@@ -20,6 +20,7 @@ $width: $height*$ratio;
 // }
 
 .login-container {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     // height: $height;
@@ -48,6 +49,8 @@ $width: $height*$ratio;
     color: $Primary-Dark;
     line-height: 128px;
     font-family: 'Source Sans Pro';
+    bottom:0;
+    position:absolute;
 
 }
 
@@ -58,6 +61,8 @@ $width: $height*$ratio;
     width: 100%;
     background-size: 100% 100%;
     background-image: url("../Imgs/Street-Dance-01.jpg");
+    position: absolute;
+    z-index: 99;
 }
 
 .login-mask-1 {
@@ -165,6 +170,7 @@ $width: $height*$ratio;
     background-position: 5px 5px;
     background-repeat: no-repeat;
     padding-left: 100px;
+    background-size: 12% auto;
 }
 
 .login-input[type=password]{
@@ -174,6 +180,7 @@ $width: $height*$ratio;
     height: 100%;
     background-color: transparent;
     box-sizing: border-box;
+    background-size: 12% auto;
 
 
     background-image: url('../SVGs/password.svg');

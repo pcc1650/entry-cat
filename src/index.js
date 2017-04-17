@@ -12,7 +12,8 @@ import Index from './components/Index'
 import EventPage from './components/EventPage'
 import Profile from './components/profile'
 
-const middleware = [ thunk, createLogger() ]
+// const middleware = [ thunk, createLogger() ]
+const middleware = [ thunk ]
 
 const store = createStore(
     reducer,

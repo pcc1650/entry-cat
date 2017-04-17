@@ -35,6 +35,11 @@ export const REQUEST_USER_GOING = 'REQUEST_USER_GOING'
 export const RECEIVE_USER_GOING = 'RECEIVE_USER_GOING'
 export const REQUEST_USER_PAST = 'REQUEST_USER_PAST'
 export const RECEIVE_USER_PAST = 'RECEIVE_USER_PAST'
+export const LOGOUTING_REQUEST = 'LOGOUTING_REQUEST'
+export const LOGOUT_REQUEST_SUCC = 'LOGOUT_REQUEST_SUCC'
+export const LOGOUT_REQUEST_FAIL = 'LOGOUT_REQUEST_FAIL'
+export const CLEAR_LOGIN_REDUCER = 'CLEAR_LOGIN_REDUCER'
+import { browserHistory } from 'react-router'
 // import { getIPs } from '../getIP'
 // getIPs(function(ip){console.log(ip);})
 
@@ -53,6 +58,22 @@ export const loginRequestSucc = (data) => ({
 
 export const loginRequestFail = () => ({
     type: LOGIN_REQUEST_FAIL,
+})
+
+export const logoutingRequest = () => ({
+    type: LOGOUTING_REQUEST,
+})
+
+export const logoutRequestSucc = () => ({
+    type: LOGOUT_REQUEST_SUCC,
+})
+
+export const logoutRequestFail = () => ({
+    type: LOGOUT_REQUEST_FAIL,
+})
+
+export const clearLoginReducer = () => ({
+    type: CLEAR_LOGIN_REDUCER,
 })
 
 export const requestingPosts = () => ({
@@ -248,9 +269,28 @@ export const login = info => dispatch => {
     let form = new FormData()
     Object.entries(info).map(([k, v]) => form.append([k, v][0], [k, v][1]))
     // return fetch('http://blackcat.dev/api/auth/token', {method: 'POST', body: form})
-    return fetch(ipAddress + '/api/auth/token', {method: 'POST', body: form, headers: {'Host': 'blackcat.dev'}})
+    return fetch(ipAddress + '/api/auth/token', {
+        // incredentials: 'include',
+        method: 'POST', body: form, headers: {'Host': 'blackcat.dev'}})
     .then(response => response.ok? response.json(): false)
     .then(body => body? dispatch(loginRequestSucc(body)): dispatch(loginRequestFail()))
+    .then(body => {
+        localStorage.setItem('userToken', body.userToken)
+        localStorage.setItem('userInfo', JSON.stringify(body.userInfo))
+    })
+
+}
+
+export const logout = credential => dispatch => {
+    dispatch(logoutingRequest())
+
+    return fetch(ipAddress + '/api/auth/token', {method: 'DELETE', headers: {'X-BLACKCAT-TOKEN': credential}})
+    .then(response => response.ok? browserHistory.push('/login'): console.log('logout failed'))
+    .then(body => {
+        localStorage.removeItem('userToken')
+        localStorage.removeItem('userInfo')
+    })
+    .then(dispatch(clearLoginReducer()))
 }
 
 export const postComment = (comment, eventId, credential) => dispatch => {

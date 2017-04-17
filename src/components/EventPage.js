@@ -29,7 +29,6 @@ class EventPage extends React.Component {
         dispatch(requestComments(this.props.params.id, credential))
         dispatch(requestLikedUsers(this.props.params.id, credential))
         dispatch(requestJoinedUsers(this.props.params.id, credential))
-
     }
 
     componentWillReceiveProps(nextProps){
@@ -130,6 +129,8 @@ class EventPage extends React.Component {
 
 
     render() {
+        console.log("***")
+        console.log(this.props)
         const { userInfo, posts, comments, commentInput, replyTo, likedUsers, joinedUsers} = this.props
         const { id } = this.props.params
         const post = posts.filter(post => post.id == id)

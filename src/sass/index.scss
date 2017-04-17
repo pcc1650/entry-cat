@@ -17,14 +17,15 @@
     width: 100%;
     position: absolute;
     top: 7vh;
+    left: 0;
 }
 
-.index-searchBar-container {
-    background-color: $Primary-Dark;
-    width: 75vw;
-    height: 93vh;
-    position: relative;
-}
+// .index-searchBar-container {
+//     background-color: $Primary-Dark;
+//     width: 75vw;
+//     height: 93vh;
+//     position: relative;
+// }
 
 #searchBarCheckbox {
     visibility: hidden;
@@ -60,7 +61,7 @@
 #searchBarCheckbox:checked + .index-label+ .index-searchBar-container {
     background-color: $Primary-Dark;
     width: 75vw;
-    height: 100vh;
+    height: 90vh;
     left: 0;
     position: relative;
 }
@@ -68,7 +69,7 @@
 .index-searchBar-container {
     background-color: $Primary-Dark;
     width: 75vw;
-    height: 100vh;
+    height: 90vh;
     left: -75vw;
     position: relative;
 }
@@ -79,6 +80,7 @@
     position: absolute;
     left: 75vw;
     top: 7vh;
+    overflow: hidden;
 }
 
 #searchBarCheckbox:checked + .index-label+ .index-searchBar-container + .banner-container{

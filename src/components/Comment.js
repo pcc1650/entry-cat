@@ -16,8 +16,9 @@ class Comment extends React.Component {
         dispatch(replyComment(username))
     }
     render(){
-        const { avatar, username, time, comment } = this.props
+        const { avatar, username, time, comment} = this.props
         const standardTime = new Date(time*1000)
+
         return (
             <div className='comment-container'>
                 <img src={avatar} className='comment-avatar'/>
